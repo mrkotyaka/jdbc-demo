@@ -1,4 +1,4 @@
-package ru.mrkotyaka.jdbcdemo.domain;
+package ru.mrkotyaka.jdbcdemo.model;
 
 public class Customer {
     private Integer id;
