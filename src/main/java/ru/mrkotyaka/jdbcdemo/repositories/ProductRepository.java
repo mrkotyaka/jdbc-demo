@@ -1,41 +1,22 @@
 package ru.mrkotyaka.jdbcdemo.repositories;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 import org.springframework.stereotype.Repository;
+import ru.mrkotyaka.jdbcdemo.model.Order;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.stream.Collectors;
+import java.util.List;
 
 @Repository
 public class ProductRepository {
 
-    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-    private final String findProductByName;
+    @PersistenceContext
+    private EntityManager em;
 
-    @Autowired
-    public ProductRepository(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
-        this.findProductByName = read("findProductByName.sql");
-    }
-
-    private String read(String scriptFileName) {
-        try (InputStream is = new ClassPathResource(scriptFileName).getInputStream();
-             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is))) {
-            return bufferedReader.lines().collect(Collectors.joining("\n"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public String getProductName(String name) {
-        MapSqlParameterSource params = new MapSqlParameterSource()
-                .addValue("name", name);
-        return namedParameterJdbcTemplate.queryForObject(findProductByName, params, String.class);
+    public List<Order> getProductName(String name) {
+        Query query = em.createQuery("select o from Order o join Customer c on o.customer.id = c.id where c.name = :name");
+        query.setParameter("name", name);
+        return (List<Order>) query.getResultList();
     }
 }
