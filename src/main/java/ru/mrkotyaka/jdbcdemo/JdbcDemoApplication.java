@@ -31,7 +31,7 @@ public class JdbcDemoApplication implements CommandLineRunner {
                 .name("ivan")
                 .surname("ivanov")
                 .age(25)
-                .phone_number("+79161234568").build();
+                .phoneNumber("+79161234568").build();
         em.persist(customer1);
         Customer customer = em.find(Customer.class, customer1.getId());
 
@@ -39,12 +39,12 @@ public class JdbcDemoApplication implements CommandLineRunner {
         orders.add(Order.builder()
                 .date(new Date())
                 .customer(customer)
-                .product_name("laptop")
+                .productName("laptop")
                 .amount(100000).build());
         orders.add(Order.builder()
                 .date(new Date())
                 .customer(customer)
-                .product_name("smartphone")
+                .productName("smartphone")
                 .amount(30000).build());
         orders.forEach(order -> em.persist(order));
     }
