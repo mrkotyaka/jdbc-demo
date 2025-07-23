@@ -1,15 +1,15 @@
 package ru.mrkotyaka.jdbcdemo.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 
 @Builder
-@Data
+//@Data
+@Setter
+@Getter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -29,5 +29,6 @@ public class Order {
     private Integer amount;
 
     @ManyToOne(optional = false)
+    @ToString.Exclude
     private Customer customer;
 }
