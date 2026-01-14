@@ -1,35 +1,33 @@
-# Задача «Слой DAO (Data Access Object)»
+# Task: “DAO (Data Access Object) Layer”
 
-## Описание
+## Description
 
-Попрактикуемся в работе со Spring JDBC, параллельно закрепляя уже пройденные темы.
+Let's practice working with Spring JDBC while reinforcing topics we have already covered.
 
-Вам надо написать приложение для работы с БД, используя скрипты, которые вы написали при выполнении [второго задания](https://github.com/netology-code/jd-homeworks/blob/master/sql-agg/task/README.md).
+You need to write an application for working with a database using the scripts you wrote when completing [the second task](https://github.com/netology-code/jd-homeworks/blob/master/sql-agg/task/README.md).
 
-**Шаг 1.** Создайте Spring Boot приложение с зависимостями на два стартера — `spring-boot-starter-jdbc` и `spring-boot-starter-web`.
+**Step 1.** Create a Spring Boot application with dependencies on two starters — `spring-boot-starter-jdbc` and `spring-boot-starter-web`.
 
-**Шаг 2.** Перенесите скрипт создания таблицы в файл `schema.sql`, чтобы Spring Boot автоматически создавал таблицу.
+**Step 2.** Move the table creation script to the `schema.sql` file so that Spring Boot automatically creates the table.
 
-**Шаг 3.** Перенесите скрипт запроса из второго задания в папку `resources`. Перепишите скрипт так, чтобы он возвращал `product_name` для именованного параметра `name`(а не только для `alexey`), который вы будете передавать в методы выполнения скрипта `NamedParameterJdbcTemplate` вместе со скриптом запроса.
+**Step 3.** Move the query script from the second task to the `resources` folder. Rewrite the script so that it returns `product_name` for the named parameter `name` (and not just for `alexey`), which you will pass to the `NamedParameterJdbcTemplate` script execution methods along with the query script.
 
-**Шаг 4.** Напишите репозиторий для работы с БД.
+**Step 4.** Write a repository for working with the database.
 
-- Создайте класс и пометьте его аннотацией Repository, либо создайте бин репозитория в Java Config классе.
-- Добавьте в поле класса String, которое содержит ваше содержание вашего скрипта. Само содержание вы можете считать с помощью кода ниже. Вам надо будет передать в метод `read` название вашего скрипта, который лежит в папке `resources`. Например так: `read(myScript.sql)`.
-- Создайте метод `getProductName(String name)`, который будет принимать имя и возвращать название продукта из базы данных.
+- Create a class and mark it with the Repository annotation, or create a repository bean in the Java Config class.
+- Add a String field to the class that contains the content of your script. You can read the content itself using the code below. You will need to pass the name of your script, located in the `resources` folder, to the `read` method. For example: `read(myScript.sql)`.
+- Create a method `getProductName(String name)` that will accept a name and return the product name from the database.
 
 ```java
 private static String read(String scriptFileName) {
         try (InputStream is = new ClassPathResource(scriptFileName).getInputStream();
              BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is))) {
-            return bufferedReader.lines().collect(Collectors.joining("\n"));
+            return bufferedReader.lines().collect(Collectors.joining(“\n”));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 ``` 
 
-**Шаг 5.** Напишите контроллер с методом-обработчиком GET-метода запроса с маппингом на endpoint `/products/fetch-product`. В query params запроса будет приходить строковый параметр `name`, который вам надо будет передавать дальше в репозиторий. То есть, ваш метод должен уметь обрабатывать запрос вида `localhost:8080/products/fetch-product?name=Ivan`.
-Контроллер должен будет возвращать название продукта, которое он получит от репозитория.
-
-**Шаг 6**. Написанный код выложите в отдельный репозиторий на GitHub и прикрепите ссылку на него в комментарий к домашнему заданию.
+**Step 5.** Write a controller with a GET request handler method mapped to the endpoint `/products/fetch-product`. The query params of the request will contain a string parameter `name`, which you will need to pass on to the repository. That is, your method must be able to handle a request of the form `localhost:8080/products/fetch-product?name=Ivan`.
+The controller will need to return the product name it receives from the repository.
