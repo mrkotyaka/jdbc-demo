@@ -1,11 +1,11 @@
-# Задача «Две таблицы с Hibernate*» (задача со звёздочкой)
+# Task “Two tables with Hibernate*” (task with an asterisk)
 
-## Описание
+## Description
 
-Эта задача необязательная, её выполнение не влияет на получение зачёта.
+This task is optional; completing it does not affect your grade.
 
-Перепишем приложение из [Задача «Слой DAO (Data Access Object)»](https://github.com/mrkotyaka/jdbc-demo/blob/main/readme.md) на Hibernate.
+Let's rewrite the application from [Task “DAO (Data Access Object) Layer”](https://github.com/mrkotyaka/jdbc-demo/blob/main/readme.md) to Hibernate.
 
-1. Нужно написать две `Entity`, соответствующие двум таблицам из задания. Учтите, что вам надо верно выбрать логику отношений этих `Entity`: `OneToOne`, `OneToMany`, `ManyToOne`, `ManyToMany`.
+1. You need to write two `Entity`s corresponding to the two tables from the assignment. Keep in mind that you need to correctly choose the relationship logic for these `Entity`s: `OneToOne`, `OneToMany`, `ManyToOne`, `ManyToMany`.
 
-2. Перепишите репозиторий, чтобы он работал с `EntityManager`, а не через `NamedParameterJdbcTemplate`.
+2. Rewrite the repository so that it works with `EntityManager` instead of `NamedParameterJdbcTemplate`.
