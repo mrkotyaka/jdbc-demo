@@ -1,13 +1,13 @@
-# Задача «Миграции*» (задача со звёздочкой)
+# Migration* task (task marked with an asterisk)
 
-## Описание
+## Description
 
-Эта задача необязательная, её выполнение не влияет на получение зачёта.
+This task is optional and does not affect your final grade.
 
-Настало время попрактиковаться в работе с механизмами миграции.
+It's time to practice working with migration mechanisms.
 
-**Что нужно сделать**
+**What you need to do**
 
-1. Необходимо переписать логику работы задания [«Слой DAO (Data Access Object)»](../task1/README.md) так, чтобы ваше приложение работало с миграциями. Не важно, выберете вы Flyway или Liquibase.
+1. Rewrite the logic of the [Data Access Object (DAO) layer](../task1/README.md) task so that your application works with migrations. It doesn't matter whether you choose Flyway or Liquibase.
 
-2. Написанный код выложите в отдельный репозиторий на GitHub и прикрепите ссылку на него в комментарий к домашнему заданию.
+2. Post the written code in a separate repository on GitHub and attach a link to it in the comments to your homework assignment.
